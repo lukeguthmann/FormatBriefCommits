@@ -1,74 +1,63 @@
-# The full stop is automatically removed at end of commitline
-# first letter of commit message is capitalised
-# use // firectly after a word to see current character count and keept typing (fix bug where socket//)
-# shows continual character after every enter. This is different from // which wont prmot you to end or
-# continue writing commit message
-# prints out full commit code so you can copy and paste it.
 
-# to come .... restart entire code
-# need to refactoring
-
-#  seperator between components of output code
+#  seperator between components of output code 
 __SEPERATOR__ = ("-" * 40)
 
-#  program title
+#  displays program title on screen
 def script_title():
     print(__SEPERATOR__)
     print("FORMATS COMMIT -M MESSAGES \n"
           "formats and counts characters of 'commit -m' messages")
     print(__SEPERATOR__)
 
-
-
+# displays instructions to user
 def commit_message_line():
-
     print("Enter a subject line with 50 characters or less.\n"
           "Insert // at end time to see character count.")
     print(__SEPERATOR__)
-
+    
+    # takes user input as for commit message
     subject_line = str(input("[Commit Message]: "))
 
-    # prints is subject line is greater than 50 character
-
-
+    
     print(__SEPERATOR__)
-    # make it so you can copy and paste git commit -m " text"
+    
     while True:
-
-        # this will be used if the user puts // at the end, it will check the count the string
+        # if user enters // at end of their input, it will activate message displaying character count
         if subject_line.endswith("//"):
 
-            # strips the // off the end so it isn't counted in the charatacter len and isn't kept in the commit
+            # strips the // off the end so it is not in character count
             subject_line = subject_line.strip("//")
 
-            # output current commit character count out of recomendation
-            print(f"[Character Count]:  {len(subject_line)} of recommended 50") # minused two to count for the //
+            # output current commit character count and reinforces recommended is 50 characters
+            print(f"[Character Count]:  {len(subject_line)} of recommended 50") 
 
             # outputs current commit message for user to see
             print(f"[Current Commmit Message]: {subject_line}")
 
-            # allows user to continue immeadiately adding to commit of finishing commmit by pressing enter alone
+            # allows user to continue adding to commit message, or, finishes commit by pressing ENTER key
             subject_line_2 = input("[Continue Typing] OR [Hit ENTER to Finish]")
 
-            # if the above var subject_line_2 is empty, it activates this bool conditional ane breaks loop
+            # if the above var subject_line_2 is empty, it activates this bool conditional and breaks loop
             if bool(subject_line_2) == False:
                 break
 
-            # if the user continues to enter in character when prompted of choice above
+            # if the user continues to enter in characters when at subject_line_2
             else:
+                
                 # this gets the current subject line, adds a space, and adds what the user just typed above
                 subject_line = subject_line + " " + subject_line_2 # truncating the two
                 print(__SEPERATOR__)
 
-                #continues on the with the loop
+                #continues on the with while loop
                 continue
 
         # if commit message is greater than recommended 50
         elif len(subject_line) > 50:
-            # strips off the // if user entered one below
+            
+            # strips off the // if user entered one
             subject_line = subject_line.strip("//")
 
-            # displats current commit character count
+            # displays current commit character count
             print(f"[Character Count]:  {len(subject_line)} of recommended 50")
 
             # created the warning message for commit count > 50
@@ -85,16 +74,16 @@ def commit_message_line():
             answer = input("[1] - hit ENTER to generate commit code .\n"
                            "[2] - input 'end' to finish and get git commit code or restart.")
 
-            # if user inputs end, it breaks out the while loop and continues on with the code
+            # if user inputs 'end' string, it breaks out the while loop and continues on with the code
             if answer == 'end':
                 break
 
-            # if user pressed the enter key, the subject lines has // added to it as to activate the first if conditon
+            # if user pressed the ENTER key, the subject lines has // added to it as to activate the first if conditon
             else:
                 subject_line = subject_line + "//"
                 print(__SEPERATOR__)
 
-        # similar to above if character count is > 50, but in this instance is if inital char count was < 50
+        # similar to above if character count is > 50, but in this instance is if inital character count was < 50
         else:
 
             # displays commit character count
@@ -136,10 +125,12 @@ def commit_message_line():
     print()
 
     print(__SEPERATOR__)
+    
     # returning the subject line but capitlised first word
     print(f"[Final Character Count]: {len(subject_line)} of recommended 50")
     print(__SEPERATOR__)
     print(__SEPERATOR__)
+    
     # makes sure that the commit message is capitalised at first word and rest are lower case
     print(f'[COPY CODE] git commit -m "{subject_line.capitalize()}"')
     print(__SEPERATOR__)
